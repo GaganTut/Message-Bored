@@ -29,11 +29,24 @@ topics.route('/')
       });
   });
 
-topics.put('/:name', (req, res) => {
-  Topic.update({
-    where: {
-      name: req.params.name
-    }
+topics.put('/:id', (req, res) => {
+  Topic.update(
+    {
+      name: req.body.name
+    },
+    {
+      where: {
+        id: req.params.id
+      }
+    })
+  .then(data => {
+    Topic.findById(req.params.id)
+      .then(data => {
+        res.json(data);
+      });
+  })
+  .catch(err => {
+    res.send(err);
   });
 });
 

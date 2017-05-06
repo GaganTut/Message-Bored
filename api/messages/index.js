@@ -5,6 +5,9 @@ const { Topic, User, Message } = require('../../models');
 
 messages.get('/latest', (req, res) => {
   Message.find({
+    order: [
+      ['updatedAt', 'DESC']
+    ],
     limit: 10,
     include: [
       {
@@ -30,12 +33,18 @@ messages.post('/', (req, res) => {
   });
 });
 
-messages.get('by-topic/:topic_id', (req, res) => {
-  Message.all({
-    where: {
-      topic_id: req.params.topic_id
+messages.get('bytopic/:topic_id', (req, res) => {
+  Message.findById(req.params.topic_id, {
+    include: [
+    {
+      model: Topic,
+      attributes: ['name']
     },
-    include: [User, Topic]
+    {
+      model: User,
+      as: 'Author',
+      attributes: ['name']
+    }]
   });
 });
 
