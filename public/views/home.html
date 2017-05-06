@@ -1,0 +1,8 @@
+<h1>Home</h1>
+<div ng-if="!loggedIn">
+  <h1><a href="/users">User Options</a></h1>
+</div>
+
+<div ng-if="loggedIn">
+  <h2>Hello, {{user}}</h2>
+</div>

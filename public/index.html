@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>Message Bored</title>
+
+  </head>
+  <body>
+
+    <div ng-app="app">
+      <h1>Welcome To Da Message Board</h1>
+
+      <nav>
+        <ul>
+          <li><a ng-href="/">Home</a></li>
+          <li><a ng-href="/users">Users</a></li>
+          <li><a ng-href="/topics">Topics</a></li>
+        </ul>
+      </nav>
+
+      <!-- "window" or portal for rendering templates from routes -->
+      <div ng-view></div>
+
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.1/angular.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.1/angular-route.min.js"></script>
+    <script src="/scripts/app.js"></script>
+    <script src="/scripts/controller.js"></script>
+    <script src="/scripts/services.js"></script>
+
+  </body>
+</html>
