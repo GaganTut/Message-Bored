@@ -9,7 +9,8 @@ angular.module('app')
           return $http.get(`/api/users/${id}`);
         }
       };
-    }])
+    }]
+  )
   .service('TopicService',
     ['$http', function($http) {
       return {
@@ -18,6 +19,15 @@ angular.module('app')
         },
         addTopic: function(topicObj) {
           return $http.post('/api/topics', topicObj);
+        }
+      };
+    }]
+  )
+  .service('MessageService',
+    ['$http', function($http) {
+      return {
+        getLatestMessages: function() {
+          return $http.get('/api/messages/latest');
         }
       };
     }]);

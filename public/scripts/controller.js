@@ -62,15 +62,26 @@ angular.module('app')
         });
 
       $scope.createTopic = function(name) {
-        console.log('Heyyyyyyy');
         TopicService.addTopic(createTopicObj(name, $rootScope.user_id))
           .then(data => {
-            console.log(data);
             location.reload();
           })
           .catch(err => {
             console.log(err);
           });
       };
-    }
-  ]);
+    }]
+  )
+
+  .controller('SingleTopicCtrl',
+    ['$rootScope', '$scope', 'TopicService',
+    function($rootScope, $scope, TopicService, MessageService) {
+      MessageService.getMessages()
+        .then(data => {
+          $scope.messages = data.data;
+        })
+        .catch(err => {
+          console.log(err);
+        });
+    }]
+  );

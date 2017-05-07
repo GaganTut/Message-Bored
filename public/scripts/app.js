@@ -16,6 +16,16 @@ angular.module('app', ['ngRoute'])
           templateUrl: '/views/topics.html',
           controller: 'TopicsCtrl',
           controllerAs: 'Topics'
+        })
+        .when('/topics/:name', {
+          templateUrl: '/views/singleTopic.html',
+          controller: 'SingleTopicCtrl',
+          controllerAs: 'SingleTopic'
+        })
+        .when('/messages', {
+          templateUrl: '/views/messages.html',
+          controller: 'MessageCtrl',
+          controllerAs: 'Messages'
         });
 
       $locationProvider.html5Mode({
