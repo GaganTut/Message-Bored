@@ -75,11 +75,11 @@ angular.module('app')
 
   .controller('SingleTopicCtrl',
     ['$rootScope', '$scope', 'TopicService',
-    function($rootScope, $scope, TopicService, MessageService) {
-      console.log(window.location.href.slice(window.location.href.lastIndexOf('/')+1));
+    function($rootScope, $scope, TopicService) {
       TopicService.getSingleTopic(1)
-        .then(data => {
-          console.log(data);
+        .then(response => {
+          $scope.topicTitle = response.data[0].Topic.name;
+          $scope.messages = response.data;
         });
     }]
   )

@@ -33,6 +33,7 @@ topics.route('/')
   });
 
 topics.get('/:id', (req, res) => {
+  console.log('Hit me!!!');
   Message.all({
     order: [
         ['updatedAt', 'DESC']

@@ -21,7 +21,7 @@ angular.module('app')
           return $http.post('/api/topics', topicObj);
         },
         getSingleTopic: function(topic_id) {
-          return $http.get(`api/topics/${topic_id}`);
+          return $http.get(`/api/topics/${topic_id}`);
         }
       };
     }]
