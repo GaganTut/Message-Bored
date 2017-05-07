@@ -10,12 +10,12 @@ angular.module('app', ['ngRoute'])
         .when('/users', {
           templateUrl: '/views/users.html',
           controller: 'UsersCtrl',
-          controllerAs: 'users'
+          controllerAs: 'Users'
         })
         .when('/topics', {
           templateUrl: '/views/topics.html',
           controller: 'TopicsCtrl',
-          controllerAs: 'topics'
+          controllerAs: 'Topics'
         });
 
       $locationProvider.html5Mode({
@@ -27,6 +27,7 @@ angular.module('app', ['ngRoute'])
     function($rootScope) {
       if (localStorage.user !== undefined) {
         $rootScope.user = localStorage.user;
+        $rootScope.user_id = localStorage.user_id;
         $rootScope.loggedIn = true;
       } else {
         $rootScope.loggedIn = false;
