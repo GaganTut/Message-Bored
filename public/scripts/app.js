@@ -17,7 +17,7 @@ angular.module('app', ['ngRoute'])
           controller: 'TopicsCtrl',
           controllerAs: 'Topics'
         })
-        .when('/topics/:name', {
+        .when('/topics/:id', {
           templateUrl: '/views/singleTopic.html',
           controller: 'SingleTopicCtrl',
           controllerAs: 'SingleTopic'

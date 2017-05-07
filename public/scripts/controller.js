@@ -76,12 +76,28 @@ angular.module('app')
   .controller('SingleTopicCtrl',
     ['$rootScope', '$scope', 'TopicService',
     function($rootScope, $scope, TopicService, MessageService) {
-      MessageService.getMessages()
+      console.log(window.location.href.slice(window.location.href.lastIndexOf('/')+1));
+      TopicService.getSingleTopic(1)
         .then(data => {
-          $scope.messages = data.data;
+          console.log(data);
+        });
+    }]
+  )
+  .controller('MessageCtrl',
+    ['$rootScope', '$scope', 'MessageService',
+    function($rootScope, $scope, MessageService) {
+      MessageService.getLatestMessages()
+        .then(data => {
+          if(Array.isArray(data.data)) {
+            $scope.messages = data.data;
+          } else {
+            $scope.messages = [data.data];
+          }
+
         })
         .catch(err => {
           console.log(err);
-        });
+        }
+      );
     }]
   );

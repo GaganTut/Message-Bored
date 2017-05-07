@@ -1,5 +1,5 @@
 <div ng-repeat="topic in topics">
-  <h1>{{topic.name}}</h1>
+  <a ng-href="/topics/{{topic.id}}"><h1>{{topic.name}}</h1></a>
   <h4>by: {{topic.Creator.name}}</h4>
 </div>
 
