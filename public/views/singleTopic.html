@@ -4,3 +4,12 @@
   <h3>{{message.body}}</h3>
   <h6>by: {{message.Author.name}} - {{message.updatedAt}}</h6>
 </div>
+
+<div ng-if="!loggedIn">
+  <h1><a href="/users">Login Or Create Account to Reply</a></h1>
+</div>
+
+<div ng-if="loggedIn">
+  <input type="text" ng-model="messageBody">
+  <input type="submit" ng-click="addMessage(messageBody)" value="Reply on Topic">
+</div>

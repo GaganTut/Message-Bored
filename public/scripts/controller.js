@@ -11,6 +11,14 @@ const createTopicObj = (name, id) => {
   };
 };
 
+const createMessageObj = (message, topicId, userId) => {
+  return {
+    body: message,
+    author_id: userId,
+    topic_id: topicId
+  };
+};
+
 angular.module('app')
   .controller('UsersCtrl',
     ['$rootScope', '$scope', 'UserService',
@@ -74,13 +82,22 @@ angular.module('app')
   )
 
   .controller('SingleTopicCtrl',
-    ['$rootScope', '$scope', 'TopicService',
-    function($rootScope, $scope, TopicService) {
-      TopicService.getSingleTopic(1)
+    ['$rootScope', '$scope', 'TopicService', 'MessageService',
+    function($rootScope, $scope, TopicService, MessageService) {
+      $scope.topicId = window.location.href.slice(window.location.href.lastIndexOf('/')+1);
+
+      TopicService.getSingleTopic($scope.topicId)
         .then(response => {
           $scope.topicTitle = response.data[0].Topic.name;
           $scope.messages = response.data;
         });
+
+      $scope.addMessage = function(message) {
+        MessageService.addMessage(createMessageObj(message, $scope.topicId, $rootScope.user_id))
+          .then(data => {
+            location.reload();
+          });
+      };
     }]
   )
   .controller('MessageCtrl',

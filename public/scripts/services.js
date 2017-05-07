@@ -31,6 +31,9 @@ angular.module('app')
       return {
         getLatestMessages: function() {
           return $http.get('/api/messages/latest');
+        },
+        addMessage: function(messageObj) {
+          return $http.post('/api/messages', messageObj);
         }
       };
     }]);
