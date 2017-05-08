@@ -1,64 +1,19 @@
-const createUserObj = (username) => {
-  return {
-    name: username
-  };
-};
-
-const createTopicObj = (name, id) => {
-  return {
-    created_by: id,
-    name: name
-  };
-};
-
-const createMessageObj = (message, topicId, userId) => {
-  return {
-    body: message,
-    author_id: userId,
-    topic_id: topicId
-  };
-};
-
 angular.module('app')
-  .controller('UsersCtrl',
-    ['$rootScope', '$scope', 'UserService',
-    function($rootScope, $scope, UserService){
-      $scope.getUser = function(username) {
-        if(username === '') {
-          $scope.userId = 'Enter Login ID';
-          return;
-        }
-        UserService.getUser(username)
-          .then(response => {
-            console.log(response.data);
-            if (response.data.length !== 1) {
-              res.send('Error, user does not exist');
-            } else {
-              localStorage.setItem('user', response.data[0].name);
-              localStorage.setItem('user_id', response.data[0].id);
-              location.reload();
-            }
-          })
-          .catch(err => {
-            console.log(err);
-          });
-      };
+  .controller('createUserCtrl',
+    ['$scope', '$location', 'UserService',
+    function($scope, $location, UserService){
 
       $scope.createUser = function(username) {
         UserService.addUser(createUserObj(username))
           .then(response => {
             localStorage.setItem('user', response.data.name);
             localStorage.setItem('user_id', response.data.id);
+            $location.path('/');
             location.reload();
           })
           .catch(err => {
             console.log(err);
           });
-      };
-
-      $scope.logOutUser = function() {
-        localStorage.clear();
-        location.reload();
       };
     }
   ])
@@ -91,9 +46,13 @@ angular.module('app')
     function($rootScope, $scope, TopicService, MessageService) {
       $scope.topicId = window.location.href.slice(window.location.href.lastIndexOf('/')+1);
 
-      TopicService.getSingleTopic($scope.topicId)
+      TopicService.getTopicInfo($scope.topicId)
         .then(response => {
-          $scope.topicTitle = response.data[0].Topic.name;
+          $scope.topicInfo = response.data;
+        });
+
+      TopicService.getMessages($scope.topicId)
+        .then(response => {
           $scope.messages = response.data;
         });
 

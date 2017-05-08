@@ -1,8 +1,7 @@
 <h1>Home</h1>
-<div ng-if="!loggedIn">
-  <h1><a href="/users">User Options</a></h1>
-</div>
-
-<div ng-if="loggedIn">
-  <h2>Hello, {{user}}</h2>
+<h1>Latest Messages Posted</h1>
+<div ng-repeat="message in messages" class="latest-messages">
+  <h1>{{message.body}}</h1>
+  <h4>by: {{message.Author.name}}</h4>
+  <h4>Topic Title: {{message.Topic.name}}</h4>
 </div>

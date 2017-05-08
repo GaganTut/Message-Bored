@@ -4,7 +4,7 @@ const messages = express.Router();
 const { Topic, User, Message } = require('../../models');
 
 messages.get('/latest', (req, res) => {
-  Message.find({
+  Message.all({
     order: [
       ['updatedAt', 'DESC']
     ],
@@ -33,19 +33,36 @@ messages.post('/', (req, res) => {
   });
 });
 
-messages.get('bytopic/:topic_id', (req, res) => {
-  Message.findById(req.params.topic_id, {
-    include: [
-    {
-      model: Topic,
-      attributes: ['name']
-    },
-    {
-      model: User,
-      as: 'Author',
-      attributes: ['name']
-    }]
-  });
+messages.get('/bytopic/:topic_id', (req, res) => {
+  Message.all({
+    order: [
+        ['updatedAt', 'DESC']
+      ],
+      include: [
+        {
+          model: User,
+          as: 'Author',
+          attributes: ['name']
+        },
+        {
+          model: Topic,
+          include: {
+            model: User,
+            as: 'Creator',
+            attributes: ['name']
+          }
+        }
+      ],
+      where: {
+        topic_id: req.params.topic_id
+      }
+  })
+    .then(data => {
+      res.json(data);
+    })
+    .catch(err => {
+      res.send(err);
+    });
 });
 
 module.exports = messages;

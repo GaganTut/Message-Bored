@@ -33,28 +33,12 @@ topics.route('/')
   });
 
 topics.get('/:id', (req, res) => {
-  console.log('Hit me!!!');
-  Message.all({
-    order: [
-        ['updatedAt', 'DESC']
-      ],
-      include: [
-        {
-          model: User,
-          as: 'Author',
-          attributes: ['name']
-        },
-        {
-          model: Topic,
-          attributes: ['name']
-        }
-      ],
-      where: {
-        topic_id: req.params.id
-      }
-  })
+  Topic.findById(req.params.id)
     .then(data => {
       res.json(data);
+    })
+    .catch(err => {
+      res.send(err);
     });
 });
 

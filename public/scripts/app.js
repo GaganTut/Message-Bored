@@ -5,12 +5,9 @@ angular.module('app', ['ngRoute'])
 
       $routeProvider
         .when('/', {
-          templateUrl: '/views/home.html'
-        })
-        .when('/users', {
-          templateUrl: '/views/users.html',
-          controller: 'UsersCtrl',
-          controllerAs: 'Users'
+          templateUrl: '/views/home.html',
+          controller: 'MessageCtrl',
+          controllerAs: 'Messages'
         })
         .when('/topics', {
           templateUrl: '/views/topics.html',
@@ -22,10 +19,9 @@ angular.module('app', ['ngRoute'])
           controller: 'SingleTopicCtrl',
           controllerAs: 'SingleTopic'
         })
-        .when('/messages', {
-          templateUrl: '/views/messages.html',
-          controller: 'MessageCtrl',
-          controllerAs: 'Messages'
+        .when('/createUser', {
+          templateUrl: '/views/createUser.html',
+          controller: 'createUserCtrl',
         });
 
       $locationProvider.html5Mode({
@@ -33,8 +29,34 @@ angular.module('app', ['ngRoute'])
         requireBase: false
       });
     }])
-  .run(['$rootScope',
-    function($rootScope) {
+  .run(['$rootScope','$location', 'UserService',
+    function($rootScope, $location, UserService) {
+      $rootScope.getUser = function(username) {
+        if(!username) {
+          $rootScope.responseError = 'Enter Login Username';
+          return;
+        }
+        UserService.getUser(username)
+          .then(response => {
+            if (response.data.length !== 1) {
+              $rootScope.responseError = 'User does not exist';
+            } else {
+              localStorage.setItem('user', response.data[0].name);
+              localStorage.setItem('user_id', response.data[0].id);
+              $location.path('/');
+              location.reload();
+            }
+          })
+          .catch(err => {
+            console.log(err);
+          });
+      };
+
+      $rootScope.logOutUser = function() {
+        localStorage.clear();
+        location.reload();
+      };
+
       if (localStorage.user !== undefined) {
         $rootScope.user = localStorage.user;
         $rootScope.user_id = localStorage.user_id;

@@ -20,8 +20,11 @@ angular.module('app')
         addTopic: function(topicObj) {
           return $http.post('/api/topics', topicObj);
         },
-        getSingleTopic: function(topic_id) {
+        getTopicInfo: function(topic_id) {
           return $http.get(`/api/topics/${topic_id}`);
+        },
+        getMessages: function(topic_id) {
+          return $http.get(`/api/messages/bytopic/${topic_id}`);
         }
       };
     }]

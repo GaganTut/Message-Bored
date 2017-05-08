@@ -14,11 +14,23 @@
       <nav>
         <ul>
           <li><a ng-href="/">Home</a></li>
-          <li><a ng-href="/users">Users</a></li>
           <li><a ng-href="/topics">Topics</a></li>
-          <li><a ng-href="/messages">Messages</a></li>
         </ul>
       </nav>
+      <div class="login-options">
+        <div ng-if="!loggedIn">
+          <h2>Login</h2>
+          <input type="text" ng-model="userId">
+          <input type="submit" ng-click="getUser(userId)">
+          <label for="username">{{responseError}}</label>
+          <a href="/createUser">Create New User Here</a>
+        </div>
+
+        <div ng-if="loggedIn">
+          <h2>Hello, {{user}}</h2>
+          <input type="submit" ng-click="logOutUser()" value="Log-Out">
+        </div>
+      </div>
 
       <!-- "window" or portal for rendering templates from routes -->
       <div ng-view></div>
@@ -27,6 +39,7 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.1/angular.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.1/angular-route.min.js"></script>
+     <script src="/scripts/helpers.js"></script>
     <script src="/scripts/app.js"></script>
     <script src="/scripts/controller.js"></script>
     <script src="/scripts/services.js"></script>
