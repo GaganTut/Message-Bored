@@ -20,8 +20,11 @@ users.post('/', (req, res) => {
     });
 });
 
-users.get('/:id', (req, res) => {
-  User.findById(req.params.id)
+users.get('/:username', (req, res) => {
+  User.all({
+    where: {
+      name: req.params.username
+    }})
     .then(data => {
       res.json(data);
     })

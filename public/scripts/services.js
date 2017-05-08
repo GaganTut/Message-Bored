@@ -5,8 +5,8 @@ angular.module('app')
         addUser: function(dataObj) {
           return $http.post('api/users', dataObj);
         },
-        getUser: function(id) {
-          return $http.get(`/api/users/${id}`);
+        getUser: function(username) {
+          return $http.get(`/api/users/${username}`);
         }
       };
     }]

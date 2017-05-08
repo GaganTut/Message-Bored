@@ -23,16 +23,21 @@ angular.module('app')
   .controller('UsersCtrl',
     ['$rootScope', '$scope', 'UserService',
     function($rootScope, $scope, UserService){
-      $scope.getUser = function(id) {
-        if(id === '') {
+      $scope.getUser = function(username) {
+        if(username === '') {
           $scope.userId = 'Enter Login ID';
           return;
         }
-        UserService.getUser(id)
+        UserService.getUser(username)
           .then(response => {
-            localStorage.setItem('user', response.data.name);
-            localStorage.setItem('user_id', response.data.id);
-            location.reload();
+            console.log(response.data);
+            if (response.data.length !== 1) {
+              res.send('Error, user does not exist');
+            } else {
+              localStorage.setItem('user', response.data[0].name);
+              localStorage.setItem('user_id', response.data[0].id);
+              location.reload();
+            }
           })
           .catch(err => {
             console.log(err);
