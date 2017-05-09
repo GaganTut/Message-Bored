@@ -81,4 +81,23 @@ angular.module('app')
         }
       );
     }]
-  );
+  )
+  .controller('UsersCtrl',
+    ['$scope', 'UserService', 'MessageService',
+    function($scope, UserService, MessageService) {
+      UserService.getUserList()
+        .then(response => {
+          $scope.userList = response.data;
+        });
+    }]
+  )
+  .controller('singleUserCtrl',
+    ['$scope', 'UserService', 'MessageService',
+    function($scope, UserService, MessageService) {
+      $scope.userId = window.location.href.slice(window.location.href.lastIndexOf('/')+1);
+
+      UserService.getUserMesages($scope.userId)
+        .then(response => {
+          $scope.userMessages = response.data;
+        });
+    }]);

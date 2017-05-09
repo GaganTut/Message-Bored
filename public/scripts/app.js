@@ -19,6 +19,11 @@ angular.module('app', ['ngRoute'])
           controller: 'SingleTopicCtrl',
           controllerAs: 'SingleTopic'
         })
+        .when('/users', {
+          templateUrl: '/views/users.html',
+          controller: 'UsersCtrl',
+          controllerAs: 'user'
+        })
         .when('/createUser', {
           templateUrl: '/views/createUser.html',
           controller: 'createUserCtrl',

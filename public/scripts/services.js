@@ -7,6 +7,12 @@ angular.module('app')
         },
         getUser: function(username) {
           return $http.get(`/api/users/${username}`);
+        },
+        getUserList: function() {
+          return $http.get('/api/users');
+        },
+        getUserMessages: function(userId) {
+          return $http.get(`/api/messages/byUser/${userId}`);
         }
       };
     }]

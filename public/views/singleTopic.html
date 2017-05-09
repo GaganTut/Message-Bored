@@ -2,7 +2,7 @@
 
 <div ng-repeat="message in messages">
   <h3>{{message.body}}</h3>
-  <h6>by: {{message.Author.name}} - {{message.updatedAt}}</h6>
+  <h6>by: {{message.Author.name}} - {{message.updatedAt | date:'short'}}</h6>
 </div>
 
 <div ng-if="!loggedIn">
