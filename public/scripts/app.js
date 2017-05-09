@@ -49,6 +49,8 @@ angular.module('app', ['ngRoute'])
     function($rootScope, $location, UserService) {
 
       //Check if user already saved in localstorage
+
+      //Rootscope saves the username as well as a boolean when user is logged in so that page can render one thing or another based on if user is logged in
       if (localStorage.user !== undefined) {
         $rootScope.username = localStorage.user;
         $rootScope.loggedIn = true;
