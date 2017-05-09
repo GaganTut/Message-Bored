@@ -25,7 +25,7 @@ topics.route('/')
   .post((req, res) => {
     Topic.create(req.body)
       .then(data => {
-        res.json(data);
+        res.redirect('/api/topics/');
       })
       .catch(err => {
         res.send(err);

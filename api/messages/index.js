@@ -29,7 +29,7 @@ messages.get('/latest', (req, res) => {
 messages.post('/', (req, res) => {
   Message.create(req.body)
     .then(data => {
-    res.json(data);
+    res.redirect(`/api/messages/bytopic/${req.body.topic_id}`);
   });
 });
 

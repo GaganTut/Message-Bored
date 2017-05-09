@@ -1,3 +1,5 @@
+//ALL THESE FUNCTIONS PREPARE AN OBJECT TO BE POSTED INTO THE DATABASE
+
 const createUserObj = (username) => {
   return {
     name: username

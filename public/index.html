@@ -4,37 +4,39 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width" />
     <title>Message Bored</title>
-
+    <link rel="stylesheet" type="text/css" href="/css/styles.css">
   </head>
   <body>
 
-    <div ng-app="app">
-      <h1>Welcome To Da Message Board</h1>
+    <div ng-app="app" class="whole-app">
 
-      <nav>
-        <ul>
-          <li><a ng-href="/">Home</a></li>
-          <li><a ng-href="/topics">Topics</a></li>
-          <li><a ng-href="/users">Users</a></li>
-        </ul>
-      </nav>
+      <h1 class="main-header">Welcome To Da Message Board</h1>
+
       <div class="login-options">
-        <div ng-if="!loggedIn">
-          <h2>Login</h2>
-          <input type="text" ng-model="userId">
-          <input type="submit" ng-click="getUser(userId)">
+        <div ng-if="!loggedIn" class="loggedIn">
+          <input type="text" ng-model="userId" placeholder="Username">
+          <input type="submit" value="Login" ng-click="getUser(userId)">
           <label for="username">{{responseError}}</label>
           <a href="/createUser">Create New User Here</a>
         </div>
 
-        <div ng-if="loggedIn">
-          <h2>Hello, {{user}}</h2>
+        <div ng-if="loggedIn" class="notLoggedIn">
+          <h2>Hello, {{username}}</h2>
           <input type="submit" ng-click="logOutUser()" value="Log-Out">
         </div>
       </div>
 
+      <nav class="nav-bar">
+        <ul>
+          <li><a ng-href="/">Home</a></li>
+          <li><a ng-href="/topics">Topics</a></li>
+          <li><a ng-href="/users">Users</a></li>
+          <li><a ng-href="/latest">Latest</a></li>
+        </ul>
+      </nav>
+
       <!-- "window" or portal for rendering templates from routes -->
-      <div ng-view></div>
+      <div ng-view class="rendered-pages"></div>
 
     </div>
 

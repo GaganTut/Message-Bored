@@ -1,0 +1,62 @@
+body {
+  background: $background;
+  display: flex;
+  font-family: $basefont;
+  justify-content: center;
+  width: 100%;
+
+  .whole-app {
+    background-color: blue;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: 3% 0;
+    width: 90%;
+
+    .main-header {
+      background-color: green;
+      font-size: 300%;
+      padding: 2% 0;
+      text-align: center;
+      width: 100%;
+    }
+
+    .nav-bar {
+      background-color: yellow;
+      display: flex;
+      justify-content: center;
+      padding: 1% 0;
+      width: 100%;
+
+      ul {
+        display: flex;
+        justify-content: space-around;
+        width: 60%;
+      }
+    }
+
+    .login-options {
+      background-color: orange;
+      display: flex;
+      justify-content: flex-end;
+      padding: 1% 0;
+      width: 100%;
+
+      .loggedIn, .notLoggedIn{
+        display: flex;
+        justify-content: space-around;
+        width: 50%;
+      }
+    }
+
+    .rendered-pages {
+      background-color: purple;
+      width: 100%;
+    }
+  }
+
+}
+a {
+  text-decoration: none;
+  color: black;
+}
