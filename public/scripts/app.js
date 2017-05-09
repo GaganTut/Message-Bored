@@ -24,6 +24,11 @@ angular.module('app', ['ngRoute'])
           controller: 'UsersCtrl',
           controllerAs: 'user'
         })
+        .when('/users/:id', {
+          templateUrl: '/views/singleUser.html',
+          controller: 'singleUserCtrl',
+          controllerAs: 'sngUser'
+        })
         .when('/createUser', {
           templateUrl: '/views/createUser.html',
           controller: 'createUserCtrl',

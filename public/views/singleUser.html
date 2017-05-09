@@ -1,0 +1,5 @@
+<h1>{{userMessages[0].Author.name}}</h1>
+<div ng-repeat="message in userMessages">
+  <h3>{{message.body}}</h3>
+  <h6>{{message.createdAt | date:'short'}}</h4>
+</div>

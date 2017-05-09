@@ -65,4 +65,30 @@ messages.get('/bytopic/:topic_id', (req, res) => {
     });
 });
 
+messages.get('/byuser/:user_id', (req, res) => {
+  Message.all({
+    order: [
+        ['updatedAt', 'DESC']
+      ],
+      include: [
+        {
+          model: Topic
+        },
+        {
+          model: User,
+          as: 'Author'
+        }
+      ],
+      where: {
+        author_id: req.params.user_id
+      }
+  })
+    .then(data => {
+      res.json(data);
+    })
+    .catch(err => {
+      res.send(err);
+    });
+});
+
 module.exports = messages;

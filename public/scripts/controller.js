@@ -96,7 +96,7 @@ angular.module('app')
     function($scope, UserService, MessageService) {
       $scope.userId = window.location.href.slice(window.location.href.lastIndexOf('/')+1);
 
-      UserService.getUserMesages($scope.userId)
+      UserService.getUserMessages($scope.userId)
         .then(response => {
           $scope.userMessages = response.data;
         });
